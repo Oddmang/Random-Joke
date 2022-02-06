@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        body {
+            background: #159957;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #155799, #159957);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #155799, #159957);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            text-align: center;
+        }
+
+        p {
+            background: rgba(255, 255, 255, .2);
+            margin: 0 auto;
+            margin-top: 50px;
+            width: 330px;
+            height: 340px;
+            height: line-height;
+            border-radius: 10px;
+            letter-spacing: 3px;
+            font-weight: bold
+        }
+
+        button {
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            opacity: .7;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p>{{ joke }}</p>
+        <button @click="getJoke">获取笑话</button>
+    </div>
+
+    <!-- 引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <!-- 引入jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                joke: '好笑的笑话'
+            },
+            methods: {
+                getJoke: function () {
+                    axios.get("https://autumnfish.cn/api/joke").then((response) => {
+                        this.joke = response.data
+                    }, (err) => {
+                        console.log(err);
+                    })
+                }
+            },
+        })
+
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+            $("body").click(function (e) {
+                var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+                var $i = $("<span/>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX, y = e.pageY;
+                $i.css({ "z-index": 100000000, "top": y - 20, "left": x, "position": "absolute", "font-weight": "bold", "color": "#ee1c25" });
+                $("body").append($i); $i.animate({ "top": y - 180, "opacity": 0 }, 1500, function () { $i.remove(); });
+            });
+        });
+    </script>
+</body>
+
+</html>
