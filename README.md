@@ -2,9 +2,9 @@
 
 #### 介绍
 
-这是我的第二个gitee，主要是利用vue+axios实现的一个通过get方法获取随机笑话的小页面。
+It is mainly a small page that uses Vue + Axios to obtain random jokes through the get method.
 
 #### 使用说明
 
-1.  直接“克隆/下载”到本地
-2.  双击index.html即可查看
+1.  Directly "clone / download" to local
+2.  Double click index.html to view
